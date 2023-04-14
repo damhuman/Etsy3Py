@@ -61,7 +61,7 @@ Create an instance of the EtsyOAuthClient
 
 `client = EtsyOAuthClient(client_id, client_secret)`
 
-If the access token expires, you can use the refresh token to obtain a new access token
+If the access token expires, you can use the refresh token to obtain a new access token and additional data 
 
 `new_access_token = client.refresh_token(refresh_token)`
 

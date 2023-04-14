@@ -52,15 +52,18 @@ The `refresh_token` method returns a dictionary containing the new access token 
 
 **Example**
 
-`# Replace these with your own values from the Etsy Developer Console
-client_id = 'your_client_id'
+Replace these with your own values from the Etsy Developer Console
+
+`client_id = 'your_client_id'
 client_secret = 'your_client_secret'`
 
-`# Create an instance of the EtsyOAuthClient
-client = EtsyOAuthClient(client_id, client_secret)`
+Create an instance of the EtsyOAuthClient
 
-`# If the access token expires, you can use the refresh token to obtain a new access token
-new_access_token = client.refresh_token(refresh_token)`
+`client = EtsyOAuthClient(client_id, client_secret)`
+
+If the access token expires, you can use the refresh token to obtain a new access token
+
+`new_access_token = client.refresh_token(refresh_token)`
 
 
 #### This package is licensed under the MIT License.

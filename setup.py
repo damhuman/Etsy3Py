@@ -12,8 +12,10 @@ setup(
     url='https://github.com/damhuman/Etsy3Py',
     keywords='etsy',
     install_requires=[
-          'requests',
-      ],
+        'requests',
+        'requests-oauthlib',
+        'mypy',
+    ],
     python_requires='>=3.6',
 
 )

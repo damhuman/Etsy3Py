@@ -3,7 +3,7 @@ from requests import Request, Session
  
  
 class BaseApiClient:
-    base_url = None  # Override me
+    base_url = "https://openapi.etsy.com"
     __token_type = None
     __token = None
     __token_expire = None
@@ -45,4 +45,12 @@ class BaseApiClient:
  
     def _get(self, path: str, params: dict = None, headers: dict = None, auth_type: str = 'none'):
         return self._make_request(path=path, method='GET', params=params,
+                                  headers=headers, auth_type=auth_type)
+
+    def _put(self, path: str, params: dict = None, headers: dict = None, auth_type: str = 'none'):
+        return self._make_request(path=path, method='PUT', params=params,
+                                  headers=headers, auth_type=auth_type)
+
+    def _delete(self, path: str, params: dict = None, headers: dict = None, auth_type: str = 'none'):
+        return self._make_request(path=path, method='DELETE', params=params,
                                   headers=headers, auth_type=auth_type)

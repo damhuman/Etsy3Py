@@ -1,12 +1,13 @@
 from typing import Optional
 
-import requests
-from urllib.parse import quote
 from requests_oauthlib import OAuth2Session
 from requests.auth import HTTPBasicAuth
 
 
 class EtsyOAuthClient(OAuth2Session):
+    authorization_url_base = "https://www.etsy.com/oauth/connect"
+    token_url_base = "https://api.etsy.com/v3/public/oauth/token"
+
     """
     The EtsyOAuthClient class is an authentication client for the ETSY marketplace
     that allows users to connect to the API with OAuth2 authentication.
@@ -42,7 +43,7 @@ class EtsyOAuthClient(OAuth2Session):
         :return: A tuple with the authorization URL and state.
         """
         authorization_url, state = super().authorization_url(
-            "https://www.etsy.com/oauth/connect",
+            self.authorization_url_base,
             code_challenge=self._client.create_code_challenge(self.code_verifier, "S256"),
             code_challenge_method="S256",
             **kwargs
@@ -58,7 +59,7 @@ class EtsyOAuthClient(OAuth2Session):
         :return: A dictionary with the access token.
         """
         return super().fetch_token(
-            "https://api.etsy.com/v3/public/oauth/token",
+            self.token_url_base,
             code=code,
             auth=self.auth,
             include_client_id=True,
@@ -75,7 +76,7 @@ class EtsyOAuthClient(OAuth2Session):
         """
         body_params = {"client_id": self.client_id}
         return super().refresh_token(
-            "https://api.etsy.com/v3/public/oauth/token",
+            self.token_url_base,
             refresh_token=refresh_token,
             auth=self.auth,
             **body_params

@@ -1,12 +1,14 @@
+from typing import Type
+
+import requests
 from requests.auth import HTTPBasicAuth
 from requests import Request, Session
  
  
 class BaseApiClient:
     base_url = "https://openapi.etsy.com"
-    __token_type = 'x-api-key'
+    __token_type = 'Bearer'
     __token = None
-    __token_expire = None
     session = Session()
  
     def _make_request(self,
@@ -16,9 +18,8 @@ class BaseApiClient:
                       headers: dict = None,
                       data: dict = None,
                       params: dict = None,
-                      auth_type: str = 'token'):
-        if auth_type == 'token':
-            self.check_token()
+                      auth_type: str = 'token') -> Type[requests.Request]:
+
         if not headers:
             headers = {}
  
@@ -38,22 +39,23 @@ class BaseApiClient:
                           auth=auth).prepare()
         response = self.session.send(request)
         return response
-
-    def check_token(self):
-        pass
  
-    def _post(self, path: str, data: dict = None, headers: dict = None, auth_type: str = 'none'):
+    def _post(self, path: str, data: dict = None, headers: dict = None,
+              auth_type: str = 'none') -> Type[requests.Request]:
         return self._make_request(path=path, method='POST', data=data,
                                   headers=headers, auth_type=auth_type)
  
-    def _get(self, path: str, params: dict = None, headers: dict = None, auth_type: str = 'none'):
+    def _get(self, path: str, params: dict = None, headers: dict = None,
+             auth_type: str = 'none') -> Type[requests.Request]:
         return self._make_request(path=path, method='GET', params=params,
                                   headers=headers, auth_type=auth_type)
 
-    def _put(self, path: str, data: dict = None, headers: dict = None, auth_type: str = 'none'):
+    def _put(self, path: str, data: dict = None, headers: dict = None,
+             auth_type: str = 'none') -> Type[requests.Request]:
         return self._make_request(path=path, method='PUT', data=data,
                                   headers=headers, auth_type=auth_type)
 
-    def _delete(self, path: str, params: dict = None, headers: dict = None, auth_type: str = 'none'):
+    def _delete(self, path: str, params: dict = None, headers: dict = None,
+                auth_type: str = 'none') -> Type[requests.Request]:
         return self._make_request(path=path, method='DELETE', params=params,
                                   headers=headers, auth_type=auth_type)

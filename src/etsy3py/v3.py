@@ -1,4 +1,4 @@
-from typing import Optional, Type
+from typing import Optional, Type, List
 
 import requests
 
@@ -6,7 +6,7 @@ from src.etsy3py.base_client import BaseApiClient
 
 
 class EtsyApi(BaseApiClient):
-    def __init__(self, access_token: str):
+    def __init__(self, access_token: str) -> None:
         self.__token = access_token
 
     def get_shop_receipt(self, shop_id: int, receipt_id: int) -> Type[requests.Response]:
@@ -217,5 +217,55 @@ class EtsyApi(BaseApiClient):
         r = self._get(path=path, params=params, auth_type='token')
         return r
 
-    def update_listing_inventory(self, listing_id):
-        pass
+    def update_listing_inventory(self, listing_id: int, products: List[dict],
+                                 price_on_property: List[int], quantity_on_property: List[int],
+                                 sku_on_property: List[int]) -> Type[requests.Response]:
+        """
+        Updates the inventory for a listing identified by a listing ID. The update fails if the supplied values for
+        product sku, offering quantity, and/or price are incompatible with values in *_on_property_* fields.
+        When setting a price, assign a float equal to amount divided by divisor as specified in the Money resource.
+        https://developers.etsy.com/documentation/reference/#operation/updateListingInventory
+        Scopes: 'listings_w'
+
+        "products": [
+            {
+              "sku": "string",
+              "property_values": [
+                {
+                  "property_id": 1,
+                  "value_ids": [
+                    1
+                  ],
+                  "scale_id": 1,
+                  "property_name": "string",
+                  "values": [
+                    "string"
+                  ]
+                }
+              ],
+              "offerings": [
+                {
+                  "price": 0,
+                  "quantity": 0,
+                  "is_enabled": true
+                }
+              ]
+            }
+        ]
+
+        :param listing_id: int - the numeric ID for the listing associated to this transaction
+        :param products: List[dict] - a JSON array of products available in a listing, even if only one product. All field names in the JSON blobs are lowercase
+        :param price_on_property: List[int] - an array of unique listing property ID integers for the properties that change product prices, if any. For example, if you charge specific prices for different sized products in the same listing, then this array contains the property ID for size
+        :param quantity_on_property: List[int] - an array of unique listing property ID integers for the properties that change the quantity of the products, if any. For example, if you stock specific quantities of different colored products in the same listing, then this array contains the property ID for color
+        :param sku_on_property: List[int] - an array of unique listing property ID integers for the properties that change the product SKU, if any. For example, if you use specific skus for different colored products in the same listing, then this array contains the property ID for color.
+        :return: requests.Response
+        """
+        path = f"/v3/application/listings/{listing_id}/inventory"
+        data = {
+            "products": products,
+            "price_on_property": price_on_property,
+            "quantity_on_property": quantity_on_property,
+            "sku_on_property": sku_on_property
+        }
+        r = self._put(path=path, data=data, auth_type='token')
+        return r

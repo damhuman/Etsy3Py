@@ -4,7 +4,7 @@ from requests import Request, Session
  
 class BaseApiClient:
     base_url = "https://openapi.etsy.com"
-    __token_type = None
+    __token_type = 'x-api-key'
     __token = None
     __token_expire = None
     session = Session()
@@ -38,6 +38,9 @@ class BaseApiClient:
                           auth=auth).prepare()
         response = self.session.send(request)
         return response
+
+    def check_token(self):
+        pass
  
     def _post(self, path: str, data: dict = None, headers: dict = None, auth_type: str = 'none'):
         return self._make_request(path=path, method='POST', data=data,
@@ -47,8 +50,8 @@ class BaseApiClient:
         return self._make_request(path=path, method='GET', params=params,
                                   headers=headers, auth_type=auth_type)
 
-    def _put(self, path: str, params: dict = None, headers: dict = None, auth_type: str = 'none'):
-        return self._make_request(path=path, method='PUT', params=params,
+    def _put(self, path: str, data: dict = None, headers: dict = None, auth_type: str = 'none'):
+        return self._make_request(path=path, method='PUT', data=data,
                                   headers=headers, auth_type=auth_type)
 
     def _delete(self, path: str, params: dict = None, headers: dict = None, auth_type: str = 'none'):

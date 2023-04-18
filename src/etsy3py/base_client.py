@@ -29,7 +29,7 @@ class BaseApiClient:
         if auth_type == 'basic':
             auth = HTTPBasicAuth(1, 1)
         if auth_type == 'token':
-            headers['Authorization'] = f'{self.__token_type} {self.__token}'
+            headers['x-api-key'] = f'{self.__token_type} {self.__token}'
  
         request = Request(method=method,
                           url=request_url,

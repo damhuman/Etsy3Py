@@ -18,7 +18,7 @@ class BaseApiClient:
                       headers: dict = None,
                       data: dict = None,
                       params: dict = None,
-                      auth_type: str = 'token') -> Type[requests.Request]:
+                      auth_type: str = 'token') -> Type[requests.Response]:
 
         if not headers:
             headers = {}
@@ -41,21 +41,21 @@ class BaseApiClient:
         return response
  
     def _post(self, path: str, data: dict = None, headers: dict = None,
-              auth_type: str = 'none') -> Type[requests.Request]:
+              auth_type: str = 'none') -> Type[requests.Response]:
         return self._make_request(path=path, method='POST', data=data,
                                   headers=headers, auth_type=auth_type)
  
     def _get(self, path: str, params: dict = None, headers: dict = None,
-             auth_type: str = 'none') -> Type[requests.Request]:
+             auth_type: str = 'none') -> Type[requests.Response]:
         return self._make_request(path=path, method='GET', params=params,
                                   headers=headers, auth_type=auth_type)
 
     def _put(self, path: str, data: dict = None, headers: dict = None,
-             auth_type: str = 'none') -> Type[requests.Request]:
+             auth_type: str = 'none') -> Type[requests.Response]:
         return self._make_request(path=path, method='PUT', data=data,
                                   headers=headers, auth_type=auth_type)
 
     def _delete(self, path: str, params: dict = None, headers: dict = None,
-                auth_type: str = 'none') -> Type[requests.Request]:
+                auth_type: str = 'none') -> Type[requests.Response]:
         return self._make_request(path=path, method='DELETE', params=params,
                                   headers=headers, auth_type=auth_type)

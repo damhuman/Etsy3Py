@@ -3,13 +3,13 @@ from typing import Type
 import requests
 from requests.auth import HTTPBasicAuth
 from requests import Request, Session
- 
- 
+
+
 class BaseApiClient:
     base_url = "https://openapi.etsy.com"
-    __auth_header = None
     __token_type = None
     __token = None
+    __client_id = None
     session = Session()
  
     def _make_request(self,
@@ -30,7 +30,8 @@ class BaseApiClient:
         if auth_type == 'basic':
             auth = HTTPBasicAuth(1, 1)
         if auth_type == 'token':
-            headers[self.__auth_header] = f'{self.__token_type} {self.__token}'
+            headers['Authorization'] = f'{self.__token_type} {self.__token}'
+            headers['x-api-key'] = f'{self.__client_id}'
  
         request = Request(method=method,
                           url=request_url,

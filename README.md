@@ -4,7 +4,9 @@ Client for Etsy API v3
 ## Installation
 You can install etsy3py using pip:
 
-`pip install etsy3py`
+``` python
+pip install etsy3py
+```
 
 
 # Authentication step-by-step
@@ -14,27 +16,37 @@ allowing users to connect to the API using OAuth2 authentication.
 ## Usage
 Here is an example of how to use the EtsyOAuthClient to obtain an access token from the Etsy API.
 
-`from etsy3py.oauth import EtsyOAuthClient`
+``` python
+from etsy3py.oauth import EtsyOAuthClient
+```
 
 Replace these with your own values from the Etsy Developer Console
 
-`client_id = 'your_client_id'
+``` python
+client_id = 'your_client_id'
 client_secret = 'your_client_secret'
 redirect_uri = 'your_redirect_uri' 
-scope = ['your_scope_1', 'your_scope_2', ...]`
+scope = ['your_scope_1', 'your_scope_2', ...]
+```
 
 Create an instance of the EtsyOAuthClient
 
-`client = EtsyOAuthClient(client_id, client_secret, redirect_uri, scope)`
+``` python
+client = EtsyOAuthClient(client_id, client_secret, redirect_uri, scope)
+```
 
 Get the authorization URL
 
-`authorization_url, state = client.authorization_url()`
+``` python
+authorization_url, state = client.authorization_url()
+```
 
 Redirect the user to the authorization URL to grant access. Once the user has granted access, get the authorization code and use it to obtain an access token
 
-`authorization_code = 'the_authorization_code'
-access_token = client.fetch_token(authorization_code)`
+``` python
+authorization_code = 'the_authorization_code'
+access_token = client.fetch_token(authorization_code)
+```
 
 You can now use the access token to make requests to the Etsy API
 
@@ -42,28 +54,57 @@ You can now use the access token to make requests to the Etsy API
 
 The `refresh_token` method of the `EtsyOAuthClient` class requests a new access token from the authorization server using a refresh token.
 
-**Parameters**
+### Parameters
 
 `refresh_token` (required): The refresh token used to obtain a new access token.
 
-**Return Value**
+### Return Value
 
 The `refresh_token` method returns a dictionary containing the new access token and any additional data returned by the authorization server.
 
-**Example**
+### Example
 
 Replace these with your own values from the Etsy Developer Console
 
-`client_id = 'your_client_id'
-client_secret = 'your_client_secret'`
+``` python
+client_id = 'your_client_id'
+client_secret = 'your_client_secret'
 
-Create an instance of the EtsyOAuthClient
+# create an instance of the EtsyOAuthClient
 
-`client = EtsyOAuthClient(client_id, client_secret)`
+client = EtsyOAuthClient(client_id, client_secret)
 
-If the access token expires, you can use the refresh token to obtain a new access token and additional data 
+# if the access token expires, you can use the refresh token to obtain a new access token and additional data 
 
-`new_access_token = client.refresh_token(refresh_token)`
+new_access_token = client.refresh_token(refresh_token)
+```
 
+# Etsy API
+This is a Python client for the Etsy API. 
+The client makes it easy to interact with the Etsy API and perform operations on a user's behalf.
+
+### Requirements
+Python 3.6 or higher
+
+## Usage
+To use the EtsyApi class, you will need to obtain an access token from the Etsy API.
+
+``` python
+from etsy3py.v3 import EtsyApi
+
+access_token = "YOUR_ACCESS_TOKEN"
+client_id = "YOUR_CLIENT_ID"
+
+etsy_api = EtsyApi(access_token=access_token, client_id=client_id)
+# you can then call methods on the etsy_api object to interact with the Etsy API.
+```
+
+### Authentication
+The EtsyApi class uses OAuth 2.0 authentication. You will need to obtain an access token from the Etsy API 
+before using the client. You can obtain an access token by following the
+instructions in the Etsy API documentation.
+
+### Rate Limiting
+The Etsy API has a rate limiting policy that limits the number of requests that can be made in a given time period.
 
 #### This package is licensed under the MIT License.

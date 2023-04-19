@@ -27,7 +27,7 @@ class EtsyApi(BaseApiClient):
 
     def update_shop_receipt(self, shop_id: int, receipt_id: int,
                             was_shipped: Optional[bool] = None,
-                            was_paid: Optional[bool] = None) -> Type[requests.Response]:
+                            was_paid: Optional[bool] = None) -> requests.Response:
         """
         Updates the status of a receipt, identified by a receipt id, from an Etsy shop
         https://developers.etsy.com/documentation/reference/#operation/updateShopReceipt
@@ -55,7 +55,7 @@ class EtsyApi(BaseApiClient):
                           sort_order: Optional[str] = None,
                           was_paid: Optional[bool] = None,
                           was_shipped: Optional[bool] = None,
-                          was_delivered: Optional[bool] = None) -> Type[requests.Response]:
+                          was_delivered: Optional[bool] = None) -> requests.Response:
         """
         Requests the Shop Receipts from a specific Shop, unfiltered or filtered by receipt id range or offset, date,
         paid, and/or shipped purchases.
@@ -96,7 +96,7 @@ class EtsyApi(BaseApiClient):
 
     def create_receipt_shipment(self, shop_id: int, receipt_id: int,
                                 tracking_code: str, carrier_name: str,
-                                send_bcc: bool, note_to_buyer: str) -> Type[requests.Response]:
+                                send_bcc: bool, note_to_buyer: str) -> requests.Response:
         """
         Submits tracking information for a Shop Receipt, which creates a Shop Receipt Shipment entry for the given
         receipt_id. Each time you successfully submit tracking info, Etsy sends a notification email to the buyer User.
@@ -128,7 +128,7 @@ class EtsyApi(BaseApiClient):
 
     def get_shop_receipt_transactions_by_listing(self, shop_id: int, listing_id: int,
                                                  limit: Optional[int] = None,
-                                                 offset: Optional[int] = None) -> Type[requests.Response]:
+                                                 offset: Optional[int] = None) -> requests.Response:
         """
         Retrieves the list of transactions associated with a listing.
         https://developers.etsy.com/documentation/reference/#operation/getShopReceiptTransactionsByListing
@@ -148,7 +148,7 @@ class EtsyApi(BaseApiClient):
         r = self._get(path=path, params=params, auth_type='token')
         return r
 
-    def get_shop_receipt_transactions_by_receipt(self, shop_id: int, receipt_id: int) -> Type[requests.Response]:
+    def get_shop_receipt_transactions_by_receipt(self, shop_id: int, receipt_id: int) -> requests.Response:
         """
         Retrieves the list of transactions associated with a specific receipt.
         https://developers.etsy.com/documentation/reference/#operation/getShopReceiptTransactionsByReceipt
@@ -162,7 +162,7 @@ class EtsyApi(BaseApiClient):
         r = self._get(path=path, auth_type='token')
         return r
 
-    def get_shop_receipt_transaction(self, shop_id: int, transaction_id: int) -> Type[requests.Response]:
+    def get_shop_receipt_transaction(self, shop_id: int, transaction_id: int) -> requests.Response:
         """
         Retrieves a transaction by transaction ID.
         https://developers.etsy.com/documentation/reference/#operation/getShopReceiptTransaction
@@ -178,7 +178,7 @@ class EtsyApi(BaseApiClient):
 
     def get_shop_receipt_transactions_by_shop(self, shop_id: int,
                                               limit: Optional[int] = None,
-                                              offset: Optional[int] = None) -> Type[requests.Response]:
+                                              offset: Optional[int] = None) -> requests.Response:
         """
         Retrieves the list of transactions associated with a shop.
         https://developers.etsy.com/documentation/reference/#operation/getShopReceiptTransactionsByShop
@@ -198,7 +198,7 @@ class EtsyApi(BaseApiClient):
         return r
 
     def get_listing_inventory(self, listing_id: int, includes: Optional[str] = None,
-                              show_deleted: bool = False) -> Type[requests.Response]:
+                              show_deleted: bool = False) -> requests.Response:
         """
         Retrieves the inventory record for a listing. Listings you did not edit using the Etsy.com inventory tools have
         no inventory records. This endpoint returns SKU data if you are the owner of the inventory records being
@@ -221,7 +221,7 @@ class EtsyApi(BaseApiClient):
 
     def update_listing_inventory(self, listing_id: int, products: List[dict],
                                  price_on_property: List[int], quantity_on_property: List[int],
-                                 sku_on_property: List[int]) -> Type[requests.Response]:
+                                 sku_on_property: List[int]) -> requests.Response:
         """
         Updates the inventory for a listing identified by a listing ID. The update fails if the supplied values for
         product sku, offering quantity, and/or price are incompatible with values in *_on_property_* fields.

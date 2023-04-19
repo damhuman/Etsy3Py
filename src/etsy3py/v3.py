@@ -6,8 +6,11 @@ from src.etsy3py.base_client import BaseApiClient
 
 
 class EtsyApi(BaseApiClient):
-    def __init__(self, access_token: str) -> None:
+    def __init__(self, access_token: str, token_type: Optional[str] = 'Bearer',
+                 auth_header: Optional[str] = 'x-api-key') -> None:
         self.__token = access_token
+        self.__token_type = token_type
+        self.__auth_header = auth_header
 
     def get_shop_receipt(self, shop_id: int, receipt_id: int) -> Type[requests.Response]:
         """

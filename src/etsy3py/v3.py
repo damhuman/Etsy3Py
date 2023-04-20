@@ -1,4 +1,4 @@
-from typing import Optional, Type, List
+from typing import Optional, List
 
 import requests
 

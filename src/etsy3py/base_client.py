@@ -1,5 +1,3 @@
-from typing import Type
-
 import requests
 from requests.auth import HTTPBasicAuth
 from requests import Request, Session
@@ -12,7 +10,7 @@ class BaseApiClient:
         self.__token_type = token_type
         self.__token = token
         self.__client_id = client_id
-        self.session = requests.Session()
+        self.session = Session()
 
     def _make_request(self,
                       path: str,

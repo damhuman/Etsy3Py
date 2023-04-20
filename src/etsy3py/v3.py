@@ -7,9 +7,13 @@ from src.etsy3py.base_client import BaseApiClient
 
 class EtsyApi(BaseApiClient):
     def __init__(self, access_token: str, client_id: str, token_type: Optional[str] = 'Bearer') -> None:
-        self.__token = access_token
-        self.__token_type = token_type
-        self.__client_id = client_id
+        """
+        Initialize EtsyApi.
+        :param access_token: str - user access token
+        :param client_id: str - client id, from ETSY developer platform
+        :param token_type: str - default: bearer, token type
+        """
+        super().__init__(access_token, client_id, token_type)
 
     def get_me(self) -> requests.Response:
         """
@@ -25,7 +29,7 @@ class EtsyApi(BaseApiClient):
 
     def get_shop_receipt(self, shop_id: int, receipt_id: int) -> requests.Response:
         """
-        Retrieves a receipt, identified by a receipt id, from an Etsy shop
+        Retrieves a receipt, identified by a receipt id, from an Etsy shop.
         https://developers.etsy.com/documentation/reference/#operation/getShopReceipt
         Scopes: 'transactions_r'
 
@@ -39,7 +43,7 @@ class EtsyApi(BaseApiClient):
 
     def update_shop_receipt(self, shop_id: int, receipt_id: int, **kwargs) -> requests.Response:
         """
-        Updates the status of a receipt, identified by a receipt id, from an Etsy shop
+        Updates the status of a receipt, identified by a receipt id, from an Etsy shop.
         https://developers.etsy.com/documentation/reference/#operation/updateShopReceipt
         Scopes: 'transactions_w'
 
@@ -266,7 +270,7 @@ class EtsyApi(BaseApiClient):
         """
         Open API V3 endpoint to delete a ShopListing. A ShopListing can be deleted only if the state is one of the
         following: SOLD_OUT, DRAFT, EXPIRED, INACTIVE, ACTIVE and is_available or ACTIVE and has seller flags:
-        SUPPRESSED (frozen), VACATION, CUSTOM_SHOPS (pattern), SELL_ON_FACEBOOK
+        SUPPRESSED (frozen), VACATION, CUSTOM_SHOPS (pattern), SELL_ON_FACEBOOK.
         https://developers.etsy.com/documentation/reference#operation/deleteListing
         Scopes: 'listings_d'
 
@@ -387,7 +391,7 @@ class EtsyApi(BaseApiClient):
 
     def get_listing_property(self, listing_id: int, property_id: int) -> requests.Response:
         """
-        Retrieves a listing's property
+        Retrieves a listing's property.
         https://developers.etsy.com/documentation/reference#operation/getListingProperty
 
         :param listing_id: int - the numeric ID for the listing associated to this transaction
@@ -400,7 +404,7 @@ class EtsyApi(BaseApiClient):
 
     def get_listing_properties(self, shop_id: int, listing_id: int) -> requests.Response:
         """
-        Get a listing's properties
+        Get a listing's properties.
         https://developers.etsy.com/documentation/reference#operation/getListingProperties
 
         :param shop_id: int - the unique positive non-zero numeric ID for an Etsy Shop
@@ -414,7 +418,7 @@ class EtsyApi(BaseApiClient):
     def update_listing(self, shop_id: int, listing_id: int, **kwargs) -> requests.Response:
         """
         Updates a listing, identified by a listing ID, for a specific shop identified by a shop ID. Note that this is a
-        PATCH method type
+        PATCH method type.
         https://developers.etsy.com/documentation/reference#operation/updateListing
         Scores: 'listings_w'
 
@@ -429,7 +433,7 @@ class EtsyApi(BaseApiClient):
 
     def get_listings_by_shop_receipt(self, receipt_id: int, shop_id: int, **kwargs) -> requests.Response:
         """
-        Gets all listings associated with a receipt
+        Gets all listings associated with a receipt.
         https://developers.etsy.com/documentation/reference#operation/getListingsByShopReceipt
         Scopes: 'transactions_r'
 
@@ -446,7 +450,7 @@ class EtsyApi(BaseApiClient):
 
     def get_listings_by_shop_return_policy(self, return_policy_id: int, shop_id: int) -> requests.Response:
         """
-        Gets all listings associated with a Return Policy
+        Gets all listings associated with a Return Policy.
         https://developers.etsy.com/documentation/reference#operation/getListingsByShopReturnPolicy
         Scopes: 'listings_r'
 
@@ -460,7 +464,7 @@ class EtsyApi(BaseApiClient):
 
     def get_listings_by_shop_section_id(self, shop_id: int, shop_section_ids: List[int], **kwargs) -> requests.Response:
         """
-        Retrieves all the listings from the section of a specific shop
+        Retrieves all the listings from the section of a specific shop.
         https://developers.etsy.com/documentation/reference#operation/getListingsByShopSectionId
 
         :param shop_id: int - the unique positive non-zero numeric ID for an Etsy Shop
@@ -477,7 +481,7 @@ class EtsyApi(BaseApiClient):
 
     def get_listing_offering(self, listing_id: int, product_id: int, product_offering_id: int) -> requests.Response:
         """
-        Get an Offering for a Listing
+        Get an Offering for a Listing.
         https://developers.etsy.com/documentation/reference/#operation/getListingOffering
 
         :param listing_id: int - the numeric ID for the listing associated to this transaction
@@ -491,7 +495,7 @@ class EtsyApi(BaseApiClient):
 
     def get_listing_product(self, listing_id: int, product_id: int) -> requests.Response:
         """
-        Open API V3 endpoint to retrieve a ListingProduct by ID
+        Open API V3 endpoint to retrieve a ListingProduct by ID.
         https://developers.etsy.com/documentation/reference/#operation/getListingProduct
         Scopes: 'listings_r'
 

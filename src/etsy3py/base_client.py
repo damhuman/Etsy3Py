@@ -7,10 +7,12 @@ from requests import Request, Session
 
 class BaseApiClient:
     base_url = "https://openapi.etsy.com"
-    __token_type = None
-    __token = None
-    __client_id = None
-    session = Session()
+
+    def __init__(self, token: str = None, client_id: str = None, token_type: str = None) -> None:
+        self.__token_type = token_type
+        self.__token = token
+        self.__client_id = client_id
+        self.session = requests.Session()
 
     def _make_request(self,
                       path: str,

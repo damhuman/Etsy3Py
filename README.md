@@ -8,6 +8,37 @@ You can install etsy3py using pip:
 pip install etsy3py
 ```
 
+## Requirements
+Python 3.6 or higher.
+
+# Etsy API
+This is a Python client for the Etsy API. 
+The client makes it easy to interact with the Etsy API and perform operations on a user's behalf.
+
+## Usage
+To use the EtsyApi class, you will need to obtain an access token from the Etsy API.
+
+``` python
+from etsy3py.v3 import EtsyApi
+
+access_token = "YOUR_ACCESS_TOKEN"
+client_id = "YOUR_CLIENT_ID"
+
+etsy_api = EtsyApi(access_token=access_token, client_id=client_id)
+
+listing_id = 12345
+listing = etsy_api.get_listing(listing_id)
+```
+
+### Authentication
+The EtsyApi class uses OAuth 2.0 authentication. You will need to obtain an access token from the Etsy API 
+before using the client. You can obtain an access token by following the
+instructions in the Etsy API documentation.
+
+### Rate Limiting
+The Etsy API has a rate limiting policy that limits the number of requests that can be made in a given time period.
+
+
 
 # Authentication step-by-step
 `EtsyOAuthClient` is a Python class that provides an authentication client for the Etsy marketplace API, 
@@ -78,33 +109,5 @@ client = EtsyOAuthClient(client_id, client_secret)
 
 new_access_token = client.refresh_token(refresh_token)
 ```
-
-# Etsy API
-This is a Python client for the Etsy API. 
-The client makes it easy to interact with the Etsy API and perform operations on a user's behalf.
-
-### Requirements
-Python 3.6 or higher
-
-## Usage
-To use the EtsyApi class, you will need to obtain an access token from the Etsy API.
-
-``` python
-from etsy3py.v3 import EtsyApi
-
-access_token = "YOUR_ACCESS_TOKEN"
-client_id = "YOUR_CLIENT_ID"
-
-etsy_api = EtsyApi(access_token=access_token, client_id=client_id)
-# you can then call methods on the etsy_api object to interact with the Etsy API.
-```
-
-### Authentication
-The EtsyApi class uses OAuth 2.0 authentication. You will need to obtain an access token from the Etsy API 
-before using the client. You can obtain an access token by following the
-instructions in the Etsy API documentation.
-
-### Rate Limiting
-The Etsy API has a rate limiting policy that limits the number of requests that can be made in a given time period.
 
 #### This package is licensed under the MIT License.

@@ -8,10 +8,12 @@ setup(
     description='ETSY API v3 Client',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    version='0.0.2',
+    version='0.0.3',
     license='MIT',
-    author="Anton Dasyuk, Ali-Abdulla",
-    author_email='anton.dasyuk@gmail.com, alexukr1999@gmail.com',
+    author="Anton Dasyuk",
+    author_email='anton.dasyuk@gmail.com',
+    maintainer="Ali-Abdulla Al-Sayed",
+    maintainer_email="alexukr1999@gmail.com",
     packages=find_packages('src'),
     package_dir={'': 'src'},
     url='https://github.com/damhuman/Etsy3Py',
@@ -24,7 +26,7 @@ setup(
     python_requires='>=3.6',
     classifiers=[
         "Programming Language :: Python :: 3",
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'License :: OSI Approved :: MIT License',
     ]
 

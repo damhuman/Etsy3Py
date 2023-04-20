@@ -81,7 +81,7 @@ access_token = client.fetch_token(authorization_code)
 
 You can now use the access token to make requests to the Etsy API
 
-## Refresh token
+# Refresh token
 
 The `refresh_token` method of the `EtsyOAuthClient` class requests a new access token from the authorization server using a refresh token.
 
@@ -93,7 +93,7 @@ The `refresh_token` method of the `EtsyOAuthClient` class requests a new access 
 
 The `refresh_token` method returns a dictionary containing the new access token and any additional data returned by the authorization server.
 
-### Example
+## Usage
 
 Replace these with your own values from the Etsy Developer Console
 

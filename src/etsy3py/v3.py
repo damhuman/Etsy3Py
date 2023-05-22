@@ -2,7 +2,7 @@ from typing import Optional, List
 
 import requests
 
-from src.etsy3py.base_client import BaseApiClient
+from etsy3py.base_client import BaseApiClient
 
 
 class EtsyApi(BaseApiClient):
